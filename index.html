@@ -8,15 +8,111 @@
   </head>
   <body>
 
-    <h1>気象庁の天気予報WebAPI経由で表示<br>愛知県の詳細</h1>
+    <h1>気象庁の天気予報WebAPI経由で表示</h1>
 
-   
+    <h2>今日、明日、明後日</h2>
+    <table class="simpleTable">
+      <thead>
+        <tr>
+          <th>日付</th>
+          <th>昼</th>
+          <th>夜</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td id="todayDate"></td>
+          <td><img id="todayDayImgae" src=""></td>
+          <td><img id="todayNightImage" src=""></td>
+        </tr>
+        <tr>
+          <td id="tomorrowDate"></td>
+          <td><img id="tomorrowDayImgae" src=""></td>
+          <td><img id="tomorrowNightImage" src=""></td>
+        </tr>
+        <tr>
+          <td id="dayAfterTomorrowDate"></td>
+          <td><img id="dayAfterTomorrowDayImgae" src=""></td>
+          <td><img id="dayAfterTomorrowNightImage" src=""></td>
+        </tr>  
+      </tbody>
+    </table>
+
+    <h2>週間天気</h2>
+    <table class="simpleTable">
+      <thead>
+        <tr>
+          <th>日付</th>
+          <th>6/1</th>
+          <th>6/2</th>
+          <th>6/3</th>
+          <th>6/4</th>
+          <th>6/5</th>
+          <th>6/6</th>
+          <th>6/7</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>天気</th>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>最高気温</th>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>最低気温</th>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>降水確率</th>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>信頼度</th>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>今日の詳細</h2>
   
     <table class="simpleTable">
       <thead>
         <tr>
-            <th>key</th>
-            <th>value</th>
+            <th>項目</th>
+            <th>内容</th>
         </tr>
       </thead>
       <tbody>
@@ -40,6 +136,14 @@
           <th>波の高さ</th>
           <td></td>
         </tr>
+        <tr id="tempMax">
+          <th>最高気温</th>
+          <td></td>
+        </tr>
+        <tr id="tempMin">
+          <th>最低気温</th>
+          <td></td>
+        </tr>
         <tr id="today">
           <th>今日の天気</th>
           <td></td>
@@ -55,6 +159,34 @@
         <tr id="text">
           <th>概要</th>
           <td></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>室内</h2>
+    <table class="simpleTable">
+      <thead>
+        <tr>
+          <th>項目</th>
+          <th>内容</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>気温</th>
+          <td>22.4℃</td>
+        </tr>
+        <tr>
+          <th>湿度</th>
+          <td>68%</td>
+        </tr>
+        <tr>
+          <th>気圧</th>
+          <td>1014hpa</td>
+        </tr>
+        <tr>
+          <th>CO2</th>
+          <td>700ppm</td>
         </tr>
       </tbody>
     </table>
