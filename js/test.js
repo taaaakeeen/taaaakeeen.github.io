@@ -73,7 +73,6 @@ fetch(url1)
 
         // getWeatherImage("100")
         console.log(readJSON())
-
     });
 
 let url2 = "https://www.jma.go.jp/bosai/forecast/data/overview_forecast/230000.json"
