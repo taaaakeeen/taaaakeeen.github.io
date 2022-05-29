@@ -1,1 +1,13 @@
-h1 { color: rgb(109, 97, 8); }
+h1 { color: rgb(109, 8, 8); }
+
+.simpleTable {
+    border: solid 1px;
+}
+
+.simpleTable th {
+    border: solid 1px;  
+}
+
+.simpleTable td {
+    border: solid 1px;  
+}
