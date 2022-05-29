@@ -4,11 +4,14 @@ const formatDate = (current_datetime)=>{
 }
 
 const getWeatherImage = (weatherCodes)=>{
-    console.log("")
+    fetch("json/weather_code.json")
+        .then(response => {
+            return response.json();
+        })
+        .then(jsondata => console.log(jsondata));
     // let  url = "https://www.jma.go.jp/bosai/forecast/img/" + 
 }
 
- 
 function readJSON(){
  
     var f = "json/weather_code.json";
@@ -71,8 +74,8 @@ fetch(url1)
         console.log("週間最低気温",weather[1].timeSeries[1].areas[0].tempsMin)
         console.log("日付",weather[1].timeSeries[1].timeDefines)
 
-        // getWeatherImage("100")
-        console.log(readJSON())
+        getWeatherImage("100")
+        // console.log(readJSON())
     });
 
 let url2 = "https://www.jma.go.jp/bosai/forecast/data/overview_forecast/230000.json"
