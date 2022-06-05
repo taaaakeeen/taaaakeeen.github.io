@@ -952,6 +952,7 @@ fetch(url1)
             Object.keys(item).map((key)=>{
                 let cell = row.insertCell(-1)
                 // console.log(key)
+                console.log(item[key])
                 if (key === "date") {
                     let oneDay = new Date(item[key])
                     cell.textContent = formatDate(oneDay,"yyyy-MM-dd")
