@@ -847,18 +847,15 @@ const getweatherCodes = () => {
         .then(jsondata => console.log(jsondata))
 }
 
-// const d = new Intl.DateTimeFormat("ja-jp", {
-//     year: "numeric",
-//     month: "2-digit",
-//     day: "2-digit",
-//     hour: "2-digit",
-//     minute: "2-digit",
-//     second: "2-digit",
-// }).format(date);
-
 const getWeatherImage = (weatherCode)=>{
+    let image = "https://www.jma.go.jp/bosai/forecast/img/" + weatherCode + ".svg"
+    return image
+}
+
+const getWeatherImages = (weatherCode)=>{
     let data = weatherCodes[weatherCode]
     let dayImage = "https://www.jma.go.jp/bosai/forecast/img/" + data[0]
+    console.log(dayImage)
     let nightImage = "https://www.jma.go.jp/bosai/forecast/img/" + data[1]
     return [dayImage,nightImage]
 }
@@ -897,9 +894,9 @@ fetch(url1)
         document.getElementById("tempMin").lastElementChild.textContent = weather[1].tempAverage.areas[0].min
 
         console.log("地域",weather[1].timeSeries[0].areas[0].area)
-        console.log("降水確率",weather[1].timeSeries[0].areas[0].pops)
-        console.log("信頼度",weather[1].timeSeries[0].areas[0].reliabilities)
-        console.log("天気コード",weather[1].timeSeries[0].areas[0].weatherCodes)
+        console.log("週間降水確率",weather[1].timeSeries[0].areas[0].pops)
+        console.log("週間天気信頼度",weather[1].timeSeries[0].areas[0].reliabilities)
+        console.log("週間天気コード",weather[1].timeSeries[0].areas[0].weatherCodes)
         console.log("日付2",weather[1].timeSeries[0].timeDefines)
 
         console.log("地域",weather[1].timeSeries[1].areas[0].area)
@@ -907,23 +904,64 @@ fetch(url1)
         console.log("週間最低気温",weather[1].timeSeries[1].areas[0].tempsMin)
         console.log("日付3",weather[1].timeSeries[1].timeDefines)
 
-        whatherImages = getWeatherImage(weather[0].timeSeries[0].areas[0].weatherCodes[0])
+        whatherImages = getWeatherImages(weather[0].timeSeries[0].areas[0].weatherCodes[0])
         today = new Date(weather[0].timeSeries[0].timeDefines[0])
         document.getElementById("todayDate").textContent = formatDate(today,"yyyy-MM-dd")
         document.getElementById("todayDayImgae").src = whatherImages[0]
         document.getElementById("todayNightImage").src = whatherImages[1]
 
-        whatherImages = getWeatherImage(weather[0].timeSeries[0].areas[0].weatherCodes[1])
+        whatherImages = getWeatherImages(weather[0].timeSeries[0].areas[0].weatherCodes[1])
         tomorrow = new Date(weather[0].timeSeries[0].timeDefines[1])
         document.getElementById("tomorrowDate").textContent = formatDate(tomorrow,"yyyy-MM-dd")
         document.getElementById("tomorrowDayImgae").src = whatherImages[0]
         document.getElementById("tomorrowNightImage").src = whatherImages[1]
 
-        whatherImages = getWeatherImage(weather[0].timeSeries[0].areas[0].weatherCodes[2])
+        whatherImages = getWeatherImages(weather[0].timeSeries[0].areas[0].weatherCodes[2])
         dayAfterTomorrow = new Date(weather[0].timeSeries[0].timeDefines[2])
         document.getElementById("dayAfterTomorrowDate").textContent = formatDate(dayAfterTomorrow,"yyyy-MM-dd")
         document.getElementById("dayAfterTomorrowDayImgae").src = whatherImages[0]
         document.getElementById("dayAfterTomorrowNightImage").src = whatherImages[1]
+
+        let weeklyData = []
+        for (let i = 0; i < 7; i++) {
+            let oneDayData = {
+                "date":weather[1].timeSeries[0].timeDefines[i],
+                "weather":weather[1].timeSeries[0].areas[0].weatherCodes[i],
+                "highestTemperature":weather[1].timeSeries[1].areas[0].tempsMax[i],
+                "lowestTemperature":weather[1].timeSeries[1].areas[0].tempsMin[i],
+                "rainyPercent":weather[1].timeSeries[0].areas[0].pops[i],
+                "degreeOfReliability":weather[1].timeSeries[0].areas[0].reliabilities[i]
+            }
+            weeklyData.push(oneDayData)
+        }
+        console.log(weeklyData)
+
+        // let table = document.getElementById("table")
+        // for (let i = 0; i < 7; i++) {
+        //     let row = table.insertRow(-1)
+        //     for (let j = 0; j < 6; j++) {
+        //         let cell = row.insertCell(-1)
+        //         cell.textContent = "["+i+","+j+"]"
+        //     }
+        // }
+
+        let table = document.getElementById("weeklyTable")
+        weeklyData.map((item,idx)=>{
+            let row = table.insertRow(-1)
+            // console.log(item)
+            Object.keys(item).map((key)=>{
+                let cell = row.insertCell(-1)
+                // console.log(key)
+                if (key === "date") {
+                    let oneDay = new Date(item[key])
+                    cell.textContent = formatDate(oneDay,"yyyy-MM-dd")
+                }else if(key === "weather") {
+                    cell.innerHTML = "<img src = '" + getWeatherImage(item[key]) + "'>"
+                }else{
+                    cell.textContent = item[key]
+                }
+            })
+        })
 
     })
 
