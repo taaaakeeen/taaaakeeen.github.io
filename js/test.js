@@ -855,7 +855,7 @@ const getWeatherImage = (weatherCode)=>{
 const getWeatherImages = (weatherCode)=>{
     let data = weatherCodes[weatherCode]
     let dayImage = "https://www.jma.go.jp/bosai/forecast/img/" + data[0]
-    console.log(dayImage)
+    console.log("!!!",dayImage)
     let nightImage = "https://www.jma.go.jp/bosai/forecast/img/" + data[1]
     return [dayImage,nightImage]
 }
@@ -916,12 +916,15 @@ fetch(url1)
         document.getElementById("tomorrowDayImgae").src = whatherImages[0]
         document.getElementById("tomorrowNightImage").src = whatherImages[1]
 
-        whatherImages = getWeatherImages(weather[0].timeSeries[0].areas[0].weatherCodes[2])
-        dayAfterTomorrow = new Date(weather[0].timeSeries[0].timeDefines[2])
-        document.getElementById("dayAfterTomorrowDate").textContent = formatDate(dayAfterTomorrow,"yyyy-MM-dd")
-        document.getElementById("dayAfterTomorrowDayImgae").src = whatherImages[0]
-        document.getElementById("dayAfterTomorrowNightImage").src = whatherImages[1]
-
+        if(weather[0].timeSeries[0].areas[0].weatherCodes.length > 2){
+            // console.log(weather[0].timeSeries[0].areas[0].weatherCodes.length)
+            whatherImages = getWeatherImages(weather[0].timeSeries[0].areas[0].weatherCodes[2])
+            dayAfterTomorrow = new Date(weather[0].timeSeries[0].timeDefines[2])
+            document.getElementById("dayAfterTomorrowDate").textContent = formatDate(dayAfterTomorrow,"yyyy-MM-dd")
+            document.getElementById("dayAfterTomorrowDayImgae").src = whatherImages[0]
+            document.getElementById("dayAfterTomorrowNightImage").src = whatherImages[1]
+        }
+        
         let weeklyData = []
         for (let i = 0; i < 7; i++) {
             let oneDayData = {
@@ -957,7 +960,9 @@ fetch(url1)
                     let oneDay = new Date(item[key])
                     cell.textContent = formatDate(oneDay,"yyyy-MM-dd")
                 }else if(key === "weather") {
-                    cell.innerHTML = "<img src = '" + getWeatherImage(item[key]) + "'>"
+                    console.log(getWeatherImages(item[key]))
+                    img = getWeatherImages(item[key])[0]
+                    cell.innerHTML = "<img src = '" + img + "'>"
                 }else{
                     cell.textContent = item[key]
                 }
