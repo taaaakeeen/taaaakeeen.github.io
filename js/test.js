@@ -968,7 +968,11 @@ fetch(url1)
                     img = getWeatherImages(item[key])[1]
                     cell.innerHTML = "<img src = '" + img + "'>"
                 }else{
-                    cell.textContent = item[key]
+                    if (item[key] === "") {
+                        cell.textContent = "-"
+                    }else{
+                        cell.textContent = item[key]
+                    }
                 }
             })
         })
