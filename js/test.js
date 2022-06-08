@@ -847,15 +847,9 @@ const getweatherCodes = () => {
         .then(jsondata => console.log(jsondata))
 }
 
-const getWeatherImage = (weatherCode)=>{
-    let image = "https://www.jma.go.jp/bosai/forecast/img/" + weatherCode + ".svg"
-    return image
-}
-
 const getWeatherImages = (weatherCode)=>{
     let data = weatherCodes[weatherCode]
     let dayImage = "https://www.jma.go.jp/bosai/forecast/img/" + data[0]
-    console.log("!!!",dayImage)
     let nightImage = "https://www.jma.go.jp/bosai/forecast/img/" + data[1]
     return [dayImage,nightImage]
 }
@@ -904,40 +898,36 @@ fetch(url1)
         console.log("週間最低気温",weather[1].timeSeries[1].areas[0].tempsMin)
         console.log("日付3",weather[1].timeSeries[1].timeDefines)
 
-        whatherImages = getWeatherImages(weather[0].timeSeries[0].areas[0].weatherCodes[0])
-        today = new Date(weather[0].timeSeries[0].timeDefines[0])
-        document.getElementById("todayDate").textContent = formatDate(today,"yyyy-MM-dd")
-        document.getElementById("todayDayImgae").src = whatherImages[0]
-        document.getElementById("todayNightImage").src = whatherImages[1]
-
-        whatherImages = getWeatherImages(weather[0].timeSeries[0].areas[0].weatherCodes[1])
-        tomorrow = new Date(weather[0].timeSeries[0].timeDefines[1])
-        document.getElementById("tomorrowDate").textContent = formatDate(tomorrow,"yyyy-MM-dd")
-        document.getElementById("tomorrowDayImgae").src = whatherImages[0]
-        document.getElementById("tomorrowNightImage").src = whatherImages[1]
-
-        if(weather[0].timeSeries[0].areas[0].weatherCodes.length > 2){
-            // console.log(weather[0].timeSeries[0].areas[0].weatherCodes.length)
-            whatherImages = getWeatherImages(weather[0].timeSeries[0].areas[0].weatherCodes[2])
-            dayAfterTomorrow = new Date(weather[0].timeSeries[0].timeDefines[2])
-            document.getElementById("dayAfterTomorrowDate").textContent = formatDate(dayAfterTomorrow,"yyyy-MM-dd")
-            document.getElementById("dayAfterTomorrowDayImgae").src = whatherImages[0]
-            document.getElementById("dayAfterTomorrowNightImage").src = whatherImages[1]
-        }
-        
-        let weeklyData = []
-        for (let i = 0; i < 7; i++) {
+        let daysData = []
+        let dates = weather[0].timeSeries[0].timeDefines
+        dates.map((item,idx)=>{
+            let oneDay = new Date(weather[0].timeSeries[0].timeDefines[idx])
             let oneDayData = {
-                "date":weather[1].timeSeries[0].timeDefines[i],
-                "weather":weather[1].timeSeries[0].areas[0].weatherCodes[i],
-                "highestTemperature":weather[1].timeSeries[1].areas[0].tempsMax[i],
-                "lowestTemperature":weather[1].timeSeries[1].areas[0].tempsMin[i],
-                "rainyPercent":weather[1].timeSeries[0].areas[0].pops[i],
-                "degreeOfReliability":weather[1].timeSeries[0].areas[0].reliabilities[i]
+                "date":formatDate(oneDay,"yyyy-MM-dd"),
+                "dayWeatherImage":getWeatherImages(weather[0].timeSeries[0].areas[0].weatherCodes[idx])[0],
+                "nightWeatherImage":getWeatherImages(weather[0].timeSeries[0].areas[0].weatherCodes[idx])[1],
+                "weather":weather[0].timeSeries[0].areas[0].weathers[idx],
+                "wave":weather[0].timeSeries[0].areas[0].waves[idx],
+                "wind":weather[0].timeSeries[0].areas[0].winds[idx]
             }
-            weeklyData.push(oneDayData)
-        }
-        console.log(weeklyData)
+            daysData.push(oneDayData)
+        })
+        console.log(daysData)
+
+        let daysTable = document.getElementById("daysTable")
+        daysData.map((item,idx)=>{
+            let row = daysTable.insertRow(-1)
+            Object.keys(item).map((key)=>{
+                console.log(item[key])
+                let cell = row.insertCell(-1)
+                let val = item[key]
+                if (key.includes("Image")){
+                    cell.innerHTML = "<img src = '" + val + "'>"
+                }else{
+                    cell.textContent = val
+                }
+            })
+        })
 
         // let table = document.getElementById("table")
         // for (let i = 0; i < 7; i++) {
@@ -947,21 +937,35 @@ fetch(url1)
         //         cell.textContent = "["+i+","+j+"]"
         //     }
         // }
+        
+        let weeklyData = []
+        for (let i = 0; i < 7; i++) {
+            let oneDayData = {
+                "date":weather[1].timeSeries[0].timeDefines[i],
+                "dayWeather":weather[1].timeSeries[0].areas[0].weatherCodes[i],
+                "nightWeather":weather[1].timeSeries[0].areas[0].weatherCodes[i],
+                "highestTemperature":weather[1].timeSeries[1].areas[0].tempsMax[i],
+                "lowestTemperature":weather[1].timeSeries[1].areas[0].tempsMin[i],
+                "rainyPercent":weather[1].timeSeries[0].areas[0].pops[i],
+                "degreeOfReliability":weather[1].timeSeries[0].areas[0].reliabilities[i]
+            }
+            weeklyData.push(oneDayData)
+        }
+        console.log(weeklyData)
 
         let table = document.getElementById("weeklyTable")
         weeklyData.map((item,idx)=>{
             let row = table.insertRow(-1)
-            // console.log(item)
             Object.keys(item).map((key)=>{
                 let cell = row.insertCell(-1)
-                // console.log(key)
-                console.log(item[key])
                 if (key === "date") {
                     let oneDay = new Date(item[key])
                     cell.textContent = formatDate(oneDay,"yyyy-MM-dd")
-                }else if(key === "weather") {
-                    console.log(getWeatherImages(item[key]))
+                }else if (key === "dayWeather") {
                     img = getWeatherImages(item[key])[0]
+                    cell.innerHTML = "<img src = '" + img + "'>"
+                }else if (key === "nightWeather") {
+                    img = getWeatherImages(item[key])[1]
                     cell.innerHTML = "<img src = '" + img + "'>"
                 }else{
                     cell.textContent = item[key]

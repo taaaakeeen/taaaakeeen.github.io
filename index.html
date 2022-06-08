@@ -30,30 +30,18 @@
           </h2>
           <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne">
             <div class="accordion-body">
-              <table class="table table-dark table-striped table-hover">
+              <table id="daysTable" class="table table-dark table-striped table-hover">
                 <thead>
                   <tr>
                     <th>日付</th>
-                    <th>昼</th>
-                    <th>夜</th>
+                    <th>天気（昼）</th>
+                    <th>天気（夜）</th>
+                    <th>予報</th>
+                    <th>波の高さ</th>
+                    <th>風向き</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td id="todayDate"></td>
-                    <td><img id="todayDayImgae" src=""></td>
-                    <td><img id="todayNightImage" src=""></td>
-                  </tr>
-                  <tr>
-                    <td id="tomorrowDate"></td>
-                    <td><img id="tomorrowDayImgae" src=""></td>
-                    <td><img id="tomorrowNightImage" src=""></td>
-                  </tr>
-                  <tr>
-                    <td id="dayAfterTomorrowDate"></td>
-                    <td><img id="dayAfterTomorrowDayImgae" src=""></td>
-                    <td><img id="dayAfterTomorrowNightImage" src=""></td>
-                  </tr>  
+                <tbody> 
                 </tbody>
               </table>
             </div>
@@ -71,7 +59,8 @@
                 <thead>
                   <tr>
                     <th>日付</th>
-                    <th>天気</th>
+                    <th>天気（昼）</th>
+                    <th>天気（夜）</th>
                     <th>最高気温</th>
                     <th>最低気温</th>
                     <th>降水確率</th>
