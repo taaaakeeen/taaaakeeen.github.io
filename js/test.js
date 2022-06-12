@@ -991,3 +991,8 @@ fetch(url2)
         // console.log(text)
         document.getElementById("text").lastElementChild.innerHTML = text
     })
+
+
+
+
+
