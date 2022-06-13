@@ -844,7 +844,7 @@ const getweatherCodes = () => {
         .then(response => {
             return response.json()
         })
-        .then(jsondata => console.log(jsondata))
+        // .then(jsondata => console.log(jsondata))
 }
 
 const getWeatherImages = (weatherCode)=>{
@@ -861,7 +861,7 @@ fetch(url1)
         return response.json()
     })
     .then(function(weather) {
-        console.log(weather)
+        // console.log(weather)
         let area = weather[0].timeSeries[0].areas[0]
         document.getElementById("publishingOffice").lastElementChild.textContent = weather[0].publishingOffice
         date = new Date(weather[0].reportDatetime)
@@ -873,30 +873,30 @@ fetch(url1)
         document.getElementById("tomorrow").lastElementChild.textContent = area.weathers[1]
         document.getElementById("dayAfterTomorrow").lastElementChild.textContent = area.weathers[2]
 
-        console.log("気象台",weather[0].publishingOffice)
-        console.log("報告日時",weather[0].reportDatetime)
-        console.log("地域",weather[0].timeSeries[0].areas[0].area)
-        console.log("波の高さ",weather[0].timeSeries[0].areas[0].waves)
-        console.log("天気コード",weather[0].timeSeries[0].areas[0].weatherCodes)
-        console.log("天気",weather[0].timeSeries[0].areas[0].weathers)
-        console.log("風",weather[0].timeSeries[0].areas[0].winds)
-        console.log("日付1",weather[0].timeSeries[0].timeDefines)
+        // console.log("気象台",weather[0].publishingOffice)
+        // console.log("報告日時",weather[0].reportDatetime)
+        // console.log("地域",weather[0].timeSeries[0].areas[0].area)
+        // console.log("波の高さ",weather[0].timeSeries[0].areas[0].waves)
+        // console.log("天気コード",weather[0].timeSeries[0].areas[0].weatherCodes)
+        // console.log("天気",weather[0].timeSeries[0].areas[0].weathers)
+        // console.log("風",weather[0].timeSeries[0].areas[0].winds)
+        // console.log("日付1",weather[0].timeSeries[0].timeDefines)
 
-        console.log("今日の最高気温",weather[1].tempAverage.areas[0].max)
-        console.log("今日の最低気温",weather[1].tempAverage.areas[0].min)
+        // console.log("今日の最高気温",weather[1].tempAverage.areas[0].max)
+        // console.log("今日の最低気温",weather[1].tempAverage.areas[0].min)
         document.getElementById("tempMax").lastElementChild.textContent = weather[1].tempAverage.areas[0].max
         document.getElementById("tempMin").lastElementChild.textContent = weather[1].tempAverage.areas[0].min
 
-        console.log("地域",weather[1].timeSeries[0].areas[0].area)
-        console.log("週間降水確率",weather[1].timeSeries[0].areas[0].pops)
-        console.log("週間天気信頼度",weather[1].timeSeries[0].areas[0].reliabilities)
-        console.log("週間天気コード",weather[1].timeSeries[0].areas[0].weatherCodes)
-        console.log("日付2",weather[1].timeSeries[0].timeDefines)
+        // console.log("地域",weather[1].timeSeries[0].areas[0].area)
+        // console.log("週間降水確率",weather[1].timeSeries[0].areas[0].pops)
+        // console.log("週間天気信頼度",weather[1].timeSeries[0].areas[0].reliabilities)
+        // console.log("週間天気コード",weather[1].timeSeries[0].areas[0].weatherCodes)
+        // console.log("日付2",weather[1].timeSeries[0].timeDefines)
 
-        console.log("地域",weather[1].timeSeries[1].areas[0].area)
-        console.log("週間最高気温",weather[1].timeSeries[1].areas[0].tempsMax)
-        console.log("週間最低気温",weather[1].timeSeries[1].areas[0].tempsMin)
-        console.log("日付3",weather[1].timeSeries[1].timeDefines)
+        // console.log("地域",weather[1].timeSeries[1].areas[0].area)
+        // console.log("週間最高気温",weather[1].timeSeries[1].areas[0].tempsMax)
+        // console.log("週間最低気温",weather[1].timeSeries[1].areas[0].tempsMin)
+        // console.log("日付3",weather[1].timeSeries[1].timeDefines)
 
         let daysData = []
         let dates = weather[0].timeSeries[0].timeDefines
@@ -912,13 +912,13 @@ fetch(url1)
             }
             daysData.push(oneDayData)
         })
-        console.log(daysData)
+        // console.log(daysData)
 
         let daysTable = document.getElementById("daysTable")
         daysData.map((item,idx)=>{
             let row = daysTable.insertRow(-1)
             Object.keys(item).map((key)=>{
-                console.log(item[key])
+                // console.log(item[key])
                 let cell = row.insertCell(-1)
                 let val = item[key]
                 if (key.includes("Image")){
@@ -951,7 +951,7 @@ fetch(url1)
             }
             weeklyData.push(oneDayData)
         }
-        console.log(weeklyData)
+        // console.log(weeklyData)
 
         let table = document.getElementById("weeklyTable")
         weeklyData.map((item,idx)=>{
