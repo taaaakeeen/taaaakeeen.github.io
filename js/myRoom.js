@@ -1,5 +1,5 @@
 
-let url3 = "https://www.taaaakeeen.com/sensor_values"
+let url3 = "https://www.taaaakeeen.com/v1/sensors"
 fetch(url3)
     .then(function(response) {
         return response.json()
