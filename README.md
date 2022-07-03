@@ -3,7 +3,7 @@ https://taaaakeeen.github.io/
 # taaaakeeen.com
 https://www.taaaakeeen.com
 # API v1
-https://www.taaaakeeen.com/v1
+https://www.taaaakeeen.com/v1/sensors
 # API v2
 https://www.taaaakeeen.com/v2/sensors?id=1&start_datetime=20220701000000&end_datetime=20220731000000
 # 地域コード
