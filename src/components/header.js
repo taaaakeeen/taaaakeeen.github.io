@@ -2,6 +2,7 @@ const NAV_ITEMS = [
   { href: '/', label: 'Top', key: 'top' },
   { href: '/weather/', label: 'Weather', key: 'weather' },
   { href: '/note/', label: 'Note', key: 'note' },
+  { href: '/stock/', label: 'Stock', key: 'stock' },
 ]
 
 export function renderHeader(currentPage) {

@@ -15,6 +15,7 @@ export default defineConfig({
         main: resolve(__dirname, 'index.html'),
         weather: resolve(__dirname, 'weather/index.html'),
         note: resolve(__dirname, 'note/index.html'),
+        stock: resolve(__dirname, 'stock/index.html'),
       },
     },
     outDir: 'dist',

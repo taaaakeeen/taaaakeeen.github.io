@@ -10,7 +10,7 @@ main.innerHTML = `
   <div class="max-w-4xl mx-auto px-4 py-16 text-center">
     <h1 class="text-4xl font-bold mb-4">taaaakeeen.github.io</h1>
     <p class="text-gray-500 mb-12">Personal website</p>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
       <a href="/weather/" class="block p-8 bg-white rounded-xl shadow hover:shadow-md transition group">
         <div class="text-4xl mb-3">&#9925;</div>
         <h2 class="text-xl font-semibold mb-2 group-hover:text-blue-600 transition-colors">Weather</h2>
@@ -20,6 +20,11 @@ main.innerHTML = `
         <div class="text-4xl mb-3">&#128221;</div>
         <h2 class="text-xl font-semibold mb-2 group-hover:text-blue-600 transition-colors">Note</h2>
         <p class="text-gray-500 text-sm">日記・メモ</p>
+      </a>
+      <a href="/stock/" class="block p-8 bg-white rounded-xl shadow hover:shadow-md transition group">
+        <div class="text-4xl mb-3">&#128200;</div>
+        <h2 class="text-xl font-semibold mb-2 group-hover:text-blue-600 transition-colors">Stock</h2>
+        <p class="text-gray-500 text-sm">株価の推移を確認</p>
       </a>
     </div>
   </div>
